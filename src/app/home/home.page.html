@@ -1,20 +1,73 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Blank
+      {{ viewTitle }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <h1>Calendar plugin</h1>
+  <calendar 
+  [eventSource]="eventSource" 
+  [calendarMode]="calendar.mode" 
+  [currentDate]="calendar.currentDate"
+  (onEventSelected)="onEventSelected($event)"
+  (onTitleChanged)="onViewTitleChanged($event)"
+  (onTimeSelected)="onTimeSelected($event)" 
+  startHour="6"
+  endHour="20"
+  step="30"
+  startingDayWeek="1">
+  </calendar>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <h1>Ion Date Time Samples</h1>
+  <ion-item>
+    <ion-label>Plain</ion-label>
+    <ion-datetime></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Specific format</ion-label>
+    <ion-datetime displayFormat="MMMM"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Bound to Variable</ion-label>
+    <ion-datetime displayFormat="MMMM" [(ngModel)]="myDate" (ionChange)="dateChanged($event)"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Placeholder</ion-label>
+    <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Disabled</ion-label>
+    <ion-datetime id="dynamicDisabled" displayFormat="MM DD YY" disabled value="1994-12-15"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Min and Max</ion-label>
+    <ion-datetime displayFormat="YYYY" min="1981" max="2002"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Custom Picker Options</ion-label>
+    <ion-datetime [pickerOptions]="customPickerOptions" placeholder="Custom Options" displayFormat="YYYY"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Custom Locale</ion-label>
+    <ion-datetime value="1995-04-15" min="1990-02" max="2000"
+      [dayShortNames]="customDayShortNames"
+      displayFormat="DDD. MMM DD, YY"
+      monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Specific days/months/years</ion-label>
+    <ion-datetime monthValues="6,7,8" yearValues="2014,2015"
+      dayValues="01,02,03,04,05,06,08,09,10, 11, 12, 13, 14" displayFormat="DD/MMM/YYYY"></ion-datetime>
+  </ion-item>
 </ion-content>
